@@ -17,7 +17,11 @@ module Cangaroo
     private
 
     def prepare_context
-      context.data = JSON.parse(context.json_body)
+      if context.json_body.kind_of?(String)
+        context.data = JSON.parse(context.json_body)
+      else
+        context.data = context.json_body.dup
+      end
     end
   end
 end

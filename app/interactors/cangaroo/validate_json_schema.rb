@@ -33,6 +33,7 @@ module Cangaroo
     private
 
     def prepare_context
+      context.json_body = JSON.parse(context.json_body) if context.json_body.kind_of?(String)
       context.request_id = context.json_body.delete('request_id')
       context.summary = context.json_body.delete('summary')
       context.parameters = context.json_body.delete('parameters')
